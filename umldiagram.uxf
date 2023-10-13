@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1.0">
+  <zoom_level>5</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>55</x>
+      <y>115</y>
+      <w>305</w>
+      <h>205</h>
+    </coordinates>
+    <panel_attributes>com.truYum.app.persitant::Customer
+--
+-id: int
+-name: String
+-userId: String
+-password: String
+-location: String
+-contactNo: String
+--
++Customer(String name, String userId, String password, String location, String contactNo): ctor
++Customer(): ctor
++getId(): int
++setId(int id): void
++getName(): String
++setName(String name): void
++getUserId(): String
++setUserId(String userId): void
++getPassword(): String
++setPassword(String password): void
++getLocation(): String
++setLocation(String location): void
++getContactNo(): String
++setContactNo(String contactNo): void
++toString(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>365</x>
+      <y>115</y>
+      <w>320</w>
+      <h>205</h>
+    </coordinates>
+    <panel_attributes>com.truYum.app.persitant::MenuItems
+--
+-id: int
+-name: String
+-price: int
+-availability: String
+-DateOfLaunch: String
+-freeDelivery: String
+--
++MenuItems(String name, int price, String availability, String dateOfLaunch, String freeDelivery): ctor
++MenuItems(): ctor
++getId(): int
++setId(int id): void
++getName(): String
++setName(String name): void
++getPrice(): int
++setPrice(int price): void
++getAvailability(): String
++setAvailability(String availability): void
++getDateOfLaunch(): String
++setDateOfLaunch(String dateOfLaunch): void
++isFreeDelivery(): String
++setFreeDelivery(String freeDelivery): void
++toString(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>690</x>
+      <y>115</y>
+      <w>190</w>
+      <h>145</h>
+    </coordinates>
+    <panel_attributes>com.truYum.app.persitant::Admin
+--
+-id: int
+-name: String
+-user_id: String
+-password: String
+--
++Admin(String name, String user_id, String password): ctor
++Admin(): ctor
++getId(): int
++setId(int id): void
++getName(): String
++setName(String name): void
++getUser_id(): String
++setUser_id(String user_id): void
++getPassword(): String
++setPassword(String password): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>55</x>
+      <y>325</y>
+      <w>720</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>com.truYum.app.controller::AdminController
+--
+-repo: AdminRepo
+--
++AddItem(@PathVariable("name") String name, @PathVariable("price") int price, @PathVariable("isavail") String isavail, @PathVariable("dateoflaunch") String dateoflaunch, @PathVariable("isfreedel") String isfreedel): MenuItems
++UpdateItemByPrice(@PathVariable("id") int id, @PathVariable("price") int price): void
++UpdateItemByAvailability(@PathVariable("id") int id, @PathVariable("isavail") String isavail): List&lt;MenuItems&gt;
++getAll(): List&lt;MenuItems&gt;
++deleteItemById(@PathVariable("id") int id): List&lt;MenuItems&gt;
++getItemById(@PathVariable("id") int id): MenuItems
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>780</x>
+      <y>325</y>
+      <w>145</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>com.truYum.app.Repository::AdminRepo
+--
+-em: EntityManager
+--
++saveItem(MenuItems MI): void
++getAllItems(): List&lt;MenuItems&gt;
++getItemById(int id): MenuItems
++deleteItemsById(int id): MenuItems
++updateByPrice(int id, int price): MenuItems
++updateByAvail(int id, String isAvail): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>55</x>
+      <y>420</y>
+      <w>145</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>com.truYum.app.Repository::CustomerRepo
+--
++price = 0: int
+-repo = new AdminRepo(): AdminRepo
++cartlist = new ArrayList(): List&lt;MenuItems&gt;
+--
++addToCart(String name): String
++removeFromCart(String name): String
++viewCart(): String
++ShowMenuItems(): List&lt;MenuItems&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>205</x>
+      <y>420</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>com.truYum.app.controller::CustomerController
+--
+-repo: CustomerRepo
+--
++AddToCart(@PathVariable("name") String name): String
++RemoveFromCart(@PathVariable("name") String name): String
++ViewCart(): String
++viewItems(): List&lt;MenuItems&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>420</x>
+      <y>420</y>
+      <w>155</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>com.truYum.app::TruYumApplication
+--
+--
++main(String[] args): //	private AdminRepo repo;&#13;
+void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>580</x>
+      <y>420</y>
+      <w>455</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>com.truYum.app.controller::loginController
+--
+-repo: loginRepo
+--
++doLogin(@PathVariable("role") String role, @PathVariable("username") String userName, @PathVariable("password") String password): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1040</x>
+      <y>420</y>
+      <w>740</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>com.truYum.app.controller::regController
+--
+-repo: RegRepo
+--
++doReg(@PathVariable("name") String name, @PathVariable("username") String userName, @PathVariable("password") String password, @PathVariable("location") String location, @PathVariable("contactno") String contactno): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>55</x>
+      <y>515</y>
+      <w>205</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>com.truYum.app.Repository::loginRepo
+--
+-em: EntityManager
+--
++doLogin(String role, String userName, String password): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>265</x>
+      <y>515</y>
+      <w>335</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>com.truYum.app.Repository::RegRepo
+--
+-em: EntityManager
+--
++doRegistration(String name, String userName, String password, String location, String contactNo): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>605</x>
+      <y>515</y>
+      <w>185</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>com.truYum.app.validator::PasswordConstraintValidator
+--
+--
++isValidPassword(String password): boolean
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>795</x>
+      <y>515</y>
+      <w>140</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>com.truYum.app.validator::UserIdValidator
+--
+--
++isValidUserName(String userId): boolean
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
