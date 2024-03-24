@@ -16,7 +16,8 @@ import com.truYum.app.Repository.*;
 public class exampleController {
 	@Autowired
 	private loginRepo repo;
-	@CrossOrigin(origins = "http://localhost:3000")
+//	@CrossOrigin(origins = "http://localhost:3000")
+//	@CrossOrigin("*")
 	@GetMapping("/check")
 	public String checkThat() {
 		return "working";

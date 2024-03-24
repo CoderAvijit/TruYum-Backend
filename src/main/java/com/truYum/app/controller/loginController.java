@@ -21,18 +21,21 @@ public class loginController {
 	private loginRepo repo;
 	@CrossOrigin(origins = "*")
 	@PostMapping("/logincontroller")
-	public ResponseEntity<Object> doLogin(@RequestParam String role,@RequestParam String email,
+	public ModelAndView doLogin(@RequestParam String role,@RequestParam String email,
 	        @RequestParam String password) {
 		String redirectUrl = repo.doLogin(role,email, password);
 		 if (redirectUrl.equals("/addmenu.html")) {
 	            // If it's an admin login, redirect to the admin menu HTML page in the static directory
-			return ResponseHandler.generateResponse("Succesfull",HttpStatus.OK);
+			ModelAndView mv = new ModelAndView("addmenu.html");
+			return mv;
 	        } else if(redirectUrl.equalsIgnoreCase("adminpage")) {
-	        	return new ResponseEntity<Object>("Role :"+role+"Id: "+email,HttpStatus.PRECONDITION_FAILED);
+	        	ModelAndView mv = new ModelAndView("editmenu.html");
+				return mv;
 	        }
 	        	else {
 	            // Handle other redirects or error messages as needed
-	        		return new ResponseEntity<Object>(HttpStatus.INTERNAL_SERVER_ERROR);
+	        		ModelAndView mv = new ModelAndView("ErrorPage.html");
+	    			return mv;
 	        }
 	}
 }
